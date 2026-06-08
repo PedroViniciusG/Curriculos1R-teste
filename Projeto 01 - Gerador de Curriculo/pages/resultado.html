@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Seu Currículo Profissional — Curriculos 1R$</title>
+        <link rel="stylesheet" href="../css/resultado.css" />
+    </head>
+    <body>
+        <div class="utility-bar">
+            <div class="utility-wrapper">
+                <button class="btn-action-secondary" onclick="backToEditor()">
+                    Voltar e Editar
+                </button>
+                <div class="utility-brand">Curriculos <span>1R$</span></div>
+                <button class="btn-action-primary" onclick="triggerPrint()">
+                    Imprimir / Salvar PDF
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="error-notice-container"
+            id="error-screen"
+            style="display: none"
+        >
+            <div class="error-card">
+                <h3>Nenhum dado encontrado</h3>
+                <p>
+                    Parece que o rascunho do currículo não foi carregado
+                    corretamente ou está vazio.
+                </p>
+                <button class="btn-action-primary" onclick="backToEditor()">
+                    Voltar ao Início
+                </button>
+            </div>
+        </div>
+
+        <main class="document-workspace" id="document-workspace">
+            <div class="a4-sheet" id="cv-render-sheet">
+                <header class="cv-header-block">
+                    <h2 id="cv-nome"></h2>
+                    <p id="cv-cargo"></p>
+                </header>
+
+                <div class="cv-columns-layout">
+                    <aside class="cv-left-col">
+                        <div
+                            class="cv-photo-area"
+                            id="preview-photo-bucket"
+                            style="display: none"
+                        >
+                            <img
+                                id="preview-photo"
+                                src=""
+                                alt="Foto de Perfil"
+                            />
+                        </div>
+
+                        <div class="cv-section-aside">
+                            <h4>Contato</h4>
+                            <ul id="cv-contato-lista"></ul>
+                        </div>
+
+                        <div
+                            class="cv-section-aside"
+                            id="cv-competencias-box"
+                            style="display: none"
+                        >
+                            <h4>Competências</h4>
+                            <ul
+                                id="cv-competencias-lista"
+                                class="bullet-list"
+                            ></ul>
+                        </div>
+
+                        <div
+                            class="cv-section-aside"
+                            id="cv-idiomas-box"
+                            style="display: none"
+                        >
+                            <h4>Idiomas</h4>
+                            <p
+                                id="cv-idiomas"
+                                style="white-space: pre-line"
+                            ></p>
+                        </div>
+                    </aside>
+
+                    <section class="cv-right-col">
+                        <div
+                            class="cv-section-main"
+                            id="cv-resumo-box"
+                            style="display: none"
+                        >
+                            <h3>Perfil Profissional</h3>
+                            <p id="cv-resumo" style="white-space: pre-line"></p>
+                        </div>
+
+                        <div
+                            class="cv-section-main"
+                            id="cv-experiencias-box"
+                            style="display: none"
+                        >
+                            <h3>Experiência Profissional</h3>
+                            <div id="cv-experiencias-container"></div>
+                        </div>
+
+                        <div
+                            class="cv-section-main"
+                            id="cv-formacoes-box"
+                            style="display: none"
+                        >
+                            <h3>Formação Acadêmica</h3>
+                            <div id="cv-formacoes-container"></div>
+                        </div>
+
+                        <div
+                            class="cv-section-main"
+                            id="cv-certificacoes-box"
+                            style="display: none"
+                        >
+                            <h3>Certificações</h3>
+                            <p
+                                id="cv-certificacoes"
+                                style="white-space: pre-line"
+                            ></p>
+                        </div>
+
+                        <div
+                            class="cv-section-main"
+                            id="cv-interesses-box"
+                            style="display: none"
+                        >
+                            <h3>Áreas de Interesse</h3>
+                            <p
+                                id="cv-interesses"
+                                style="white-space: pre-line"
+                            ></p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <script src="../js/resultado.js"></script>
+    </body>
+</html>
