@@ -1,35 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <title>Gerador de Currículo PDF - Curriculos 1R$ | Criar Online</title>
-
-        <meta
-            name="description"
-            content="Crie seu currículo profissional em minutos com o Curriculos 1R$. Preencha seus dados de forma simples e baixe o PDF perfeito pronto para imprimir."
-        />
-        <meta
-            property="og:title"
-            content="Gerador de Currículo PDF | Curriculos 1R$"
-        />
-        <meta
-            property="og:description"
-            content="Crie seu currículo profissional em minutos de forma simples e rápida."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://curriculos1rs.com.br" />
-        <meta
-            property="og:image"
-            content="https://curriculos1rs.com.br/img/preview-compartilhamento.png"
-        />
-
+        <title>Gerador de Currículo PDF - Curriculos 1R$</title>
+        <link rel="stylesheet" href="css/global.css" />
         <link rel="stylesheet" href="css/index.css" />
     </head>
     <body>
         <div class="app-container">
-            
             <main class="form-sidebar">
                 <div class="sidebar-content-wrapper">
                     <header
@@ -43,26 +22,18 @@
                             >
                             <button
                                 class="btn-reset-app"
-                                onclick="resetAppData()"
+                                onclick="executeResetApp()"
                             >
                                 Reiniciar
                             </button>
                         </div>
                         <div class="progress-container">
-                            <p id="step-indicator">Etapa 1 de 7</p>
+                            <p id="step-indicator">Etapa 1 de 9</p>
                             <div class="progress-bar">
                                 <div class="progress-fill" id="progress"></div>
                             </div>
                         </div>
                     </header>
-
-                    <div
-                        class="ad-placeholder ad-top"
-                        id="ad-top-box"
-                        style="display: none"
-                    >
-                        <span>Espaço Publicitário</span>
-                    </div>
 
                     <div
                         class="confirm-notice-box"
@@ -89,10 +60,73 @@
                         </div>
                     </div>
 
-                    <section class="step-box">
+                    <section class="step-box" id="form-step-box">
                         <h2 id="field-label" style="display: none"></h2>
                         <div id="interactive-content"></div>
                     </section>
+
+                    <div
+                        class="escolha-modelo-container step-box"
+                        id="box-escolha-modelo"
+                        style="display: none"
+                    >
+                        <h2
+                            style="
+                                color: white;
+                                margin-bottom: 15px;
+                                font-size: 18px;
+                            "
+                        >
+                            Tudo Pronto!
+                        </h2>
+                        <p
+                            style="
+                                color: #a1a1aa;
+                                margin-bottom: 20px;
+                                font-size: 13px;
+                            "
+                        >
+                            Selecione o design que mais combina com você antes
+                            de avançar:
+                        </p>
+
+                        <div
+                            class="botoes-modelos"
+                            style="
+                                display: flex;
+                                flex-direction: column;
+                                gap: 12px;
+                                margin-bottom: 25px;
+                            "
+                        >
+                            <button
+                                class="btn-secondary-lg btn-modelo-classico"
+                                onclick="aplicarModelo('padrao')"
+                            >
+                                Clássico (Padrão)
+                            </button>
+                            <button
+                                class="btn-secondary-lg btn-modelo-moderno"
+                                onclick="aplicarModelo('modelo-moderno')"
+                            >
+                                Moderno
+                            </button>
+                            <button
+                                class="btn-secondary-lg btn-modelo-minimalista"
+                                onclick="aplicarModelo('modelo-minimalista')"
+                            >
+                                Minimalista
+                            </button>
+                        </div>
+
+                        <button
+                            class="btn-primary-lg"
+                            style="width: 100%"
+                            onclick="finalizarEIrParaResultado()"
+                        >
+                            AVANÇAR PARA DOWNLOAD
+                        </button>
+                    </div>
 
                     <div
                         class="error-notice-box"
@@ -125,9 +159,6 @@
                                 Avançar
                             </button>
                         </div>
-                        <div class="ad-placeholder ad-bottom">
-                            <span>Espaço Publicitário</span>
-                        </div>
                     </footer>
                 </div>
             </main>
@@ -159,7 +190,6 @@
                                     <li>Telefone</li>
                                     <li>E-mail</li>
                                     <li>Localização</li>
-                                    <li id="cv-cpf-item" style="display: none;">CPF</li>
                                 </ul>
                             </div>
 
@@ -179,7 +209,11 @@
                                 <h4>Idiomas</h4>
                                 <p
                                     id="cv-idiomas"
-                                    style="white-space: pre-line"
+                                    style="
+                                        white-space: pre-line;
+                                        font-size: 11px;
+                                        color: #333;
+                                    "
                                 ></p>
                             </div>
                         </div>
@@ -209,10 +243,7 @@
                                 style="display: none"
                             >
                                 <h3>Certificações</h3>
-                                <p
-                                    id="cv-certificacoes"
-                                    style="white-space: pre-line"
-                                ></p>
+                                <div id="cv-certificacoes-container"></div>
                             </div>
 
                             <div
@@ -231,7 +262,6 @@
                 </div>
             </aside>
         </div>
-
         <script src="js/index.js"></script>
     </body>
 </html>

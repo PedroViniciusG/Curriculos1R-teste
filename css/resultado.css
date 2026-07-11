@@ -1,24 +1,7 @@
-:root {
-    --bg-workspace: #1c1c1f;
-    --bg-bar: #121215;
-    --border-premium: #26262b;
-    --border-light: #e5e7eb;
-    --text-main: #f3f4f6;
-    --text-muted: #a1a1aa;
-    --accent: #ffffff;
-    --accent-hover: #e4e4e7;
-    --error-color: #ef4444;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-        sans-serif;
-    letter-spacing: -0.01em;
-}
+/* =========================================
+   ESTILOS ESPECÍFICOS DA TELA DE RESULTADO
+   Variáveis, reset e scrollbar estão no global.css
+   ========================================= */
 
 body {
     background-color: var(--bg-workspace);
@@ -107,9 +90,10 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
 }
 
-/* Elementos do Currículo (Idênticos ao Preview) */
+/* Elementos Base do Currículo (Padrão) */
 .cv-header-block {
     border-bottom: 2px solid #000000;
     padding-bottom: 15px;
@@ -222,37 +206,102 @@ body {
     padding-left: 10px;
 }
 
-/* Tela de Erro */
-.error-notice-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.error-card {
-    background-color: var(--bg-bar);
-    border: 1px solid var(--border-premium);
-    max-width: 400px;
-    width: 100%;
-    padding: 30px;
-    text-align: center;
-}
-.error-card h3 {
-    color: var(--text-main);
-    font-size: 16px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-}
-.error-card p {
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-bottom: 25px;
-    line-height: 1.5;
+/* ==========================================================================
+   MODIFICADORES DE LAYOUT (REPLICAÇÃO EXATA DO INDEX / PREVIEW)
+   ========================================================================== */
+
+/* =========================================
+   MODELO 2: MODERNO (Cores e Blocos)
+   ========================================= */
+.modelo-moderno .cv-header-block {
+    background-color: #2b3a4a;
+    color: #ffffff !important;
+    padding: 30px 45px;
+    margin: -45px -45px 25px -45px;
+    border-bottom: none;
 }
 
-/* REGRAS CRÍTICAS DE IMPRESSÃO (Remove elementos web e formata folha física/PDF) */
+.modelo-moderno .cv-header-block h2 {
+    color: #ffffff !important;
+}
+
+.modelo-moderno .cv-header-block p {
+    color: #a0aec0 !important;
+}
+
+.modelo-moderno .cv-section-main h3 {
+    color: #2b3a4a !important;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.modelo-moderno .cv-left-col {
+    background-color: #f7fafc;
+    margin: -25px 0 -45px -45px;
+    padding: 25px 20px 45px 45px;
+    border-right: none;
+}
+
+.modelo-moderno .cv-left-col h4 {
+    color: #2b3a4a !important;
+    border-bottom-color: #2b3a4a;
+}
+
+.modelo-moderno .cv-left-col ul {
+    color: #2d3748 !important;
+}
+
+/* =========================================
+   MODELO 3: MINIMALISTA (Linhas Limpas)
+   ========================================= */
+.modelo-minimalista .cv-header-block {
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: transparent !important;
+    margin: 0 0 25px 0 !important;
+    padding: 0 0 15px 0 !important;
+}
+
+.modelo-minimalista .cv-header-block h2 {
+    color: #000000 !important;
+}
+
+.modelo-minimalista .cv-header-block p {
+    color: #666666 !important;
+}
+
+.modelo-minimalista .cv-columns-layout {
+    flex-direction: column !important;
+}
+
+.modelo-minimalista .cv-left-col {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px dashed #ccc !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    justify-content: space-between !important;
+    background-color: transparent !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.modelo-minimalista .cv-left-col .cv-section-aside {
+    flex: 1;
+    min-width: 140px;
+    margin-bottom: 0 !important;
+}
+
+.modelo-minimalista .cv-section-main h3 {
+    border-bottom: none !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666666 !important;
+}
+
+/* REGRAS CRÍTICAS DE IMPRESSÃO */
 @media print {
     body,
     html {
@@ -274,9 +323,275 @@ body {
         margin: 0 !important;
         page-break-inside: avoid;
     }
-    /* Força navegadores baseados no Chromium a imprimirem as cores de borda corretamente */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+}
+
+/* =========================================
+   ELEMENTOS DO MODAL DE PAGAMENTO PIX E ERRO
+   ========================================= */
+.payment-modal-overlay,
+.error-notice-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.payment-card,
+.error-card {
+    background-color: #121215;
+    border: 1px solid #26262b;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    color: #f3f4f6;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.payment-card h3,
+.error-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.payment-card p,
+.error-card p {
+    font-size: 14px;
+    color: #a1a1aa;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.pix-qr-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.pix-qr-mock {
+    width: 160px;
+    height: 160px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+}
+
+.pix-copy-paste-box {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.pix-copy-paste-box label {
+    font-size: 12px;
+    color: #a1a1aa;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pix-copy-paste-box input {
+    width: 100%;
+    background-color: #1c1c1f;
+    border: 1px solid #26262b;
+    color: #f3f4f6;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.pix-copy-paste-box button {
+    width: 100%;
+    background-color: #26262b;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pix-copy-paste-box button:hover {
+    background-color: #3f3f46;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-modal-cancel {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid #26262b;
+    color: #a1a1aa;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-modal-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.btn-modal-confirm {
+    flex: 1;
+    background-color: #ffffff;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-modal-confirm:hover {
+    background-color: #e4e4e7;
+}
+/* Garante que o A4 tenha largura fixa e não se deforme */
+.a4-sheet {
+    width: 595px !important;
+    min-width: 595px !important;
+    max-width: 595px !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 auto;
+    /* Remove qualquer flex-grow do pai que esteja esticando a folha */
+    flex-shrink: 0 !important;
+}
+
+/* Corrige o layout das colunas no Modelo Moderno */
+.modelo-moderno .cv-columns-layout {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.modelo-moderno .cv-left-col {
+    width: 165px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Corrige o layout das colunas no Modelo Padrão */
+.cv-columns-layout {
+    display: flex !important;
+    flex-direction: row !important;
+}
+/* ========================================================
+   RESULTADO.CSS - ESTRUTURA CORRIGIDA
+   ======================================================== */
+
+body {
+    background-color: var(--bg-workspace);
+    color: #000;
+    overflow-x: hidden;
+}
+
+/* Garante que a área de visualização não deforme a folha */
+.document-workspace {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 40px 0 !important;
+    margin-top: 70px !important;
+}
+
+/* A Regra de Ouro: Bloqueia o tamanho da folha A4 */
+.a4-sheet {
+    width: 595px !important;
+    min-width: 595px !important;
+    max-width: 595px !important;
+    min-height: 842px !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+    padding: 45px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Layout das colunas (forçado para não quebrar) */
+.cv-columns-layout {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px !important;
+    width: 100% !important;
+}
+
+.cv-left-col {
+    width: 165px !important;
+    flex-shrink: 0 !important;
+    border-right: 1px solid var(--border-light);
+}
+
+/* Ajustes de Impressão */
+@media print {
+    body {
+        background: #fff !important;
+    }
+    .utility-bar {
+        display: none !important;
+    }
+    .document-workspace {
+        margin-top: 0 !important;
+        padding: 0 !important;
+    }
+    .a4-sheet {
+        box-shadow: none !important;
+        margin: 0 auto !important;
+    }
+}
+/* Forçar a folha A4 a ignorar qualquer contêiner flex pai */
+.a4-sheet {
+    width: 595px !important;
+    min-width: 595px !important;
+    max-width: 595px !important;
+    height: 842px !important; /* Altura fixa para o A4 */
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 auto !important;
+    padding: 45px !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important; /* IMPORTANTE: Impede que o flexbox esprema a folha */
+    overflow: hidden !important;
+}
+
+/* Garante que o contêiner de visualização não force o tamanho da folha */
+.document-workspace {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    overflow: auto !important;
+}
+/* Proteção contra manipulação via JS */
+#cv-render-sheet {
+    width: 595px !important;
+    min-width: 595px !important;
+    max-width: 595px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-shrink: 0 !important;
 }

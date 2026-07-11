@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Seu Currículo Profissional — Curriculos 1R$</title>
+        <link rel="stylesheet" href="../css/global.css" />
         <link rel="stylesheet" href="../css/resultado.css" />
     </head>
     <body>
@@ -13,9 +14,77 @@
                     Voltar e Editar
                 </button>
                 <div class="utility-brand">Curriculos <span>1R$</span></div>
-                <button class="btn-action-primary" onclick="triggerPrint()">
+                <button
+                    class="btn-action-primary"
+                    id="btn-pay-trigger"
+                    onclick="openPaymentModal()"
+                >
+                    Liberar Download (R$ 1,00)
+                </button>
+                <button
+                    class="btn-action-primary"
+                    id="btn-print-real"
+                    onclick="triggerPrint()"
+                    style="display: none; background-color: #22c55e"
+                >
                     Imprimir / Salvar PDF
                 </button>
+            </div>
+        </div>
+
+        <div
+            class="payment-modal-overlay"
+            id="payment-modal"
+            style="display: none"
+        >
+            <div class="payment-card">
+                <h3>Contribuição de Manutenção</h3>
+                <p>
+                    Para baixar seu documento em alta definição, realize o
+                    pagamento simbólico de apenas <strong>R$ 1,00</strong>.
+                </p>
+
+                <div class="pix-qr-container">
+                    <div class="pix-qr-mock">
+                        <span style="font-size: 40px">📱</span>
+                        <p
+                            style="
+                                font-size: 11px;
+                                margin-top: 5px;
+                                font-weight: bold;
+                                color: #333;
+                            "
+                        >
+                            QR CODE PIX ATIVO
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pix-copy-paste-box">
+                    <label>Código Copia e Cola:</label>
+                    <input
+                        type="text"
+                        readonly
+                        value="00020101021126360014br.gov.bcb.pix01140000000000000052040000530398654041.005802BR5920Curriculos Manutencao6009SAO PAULO62070503***6304ABCD"
+                        id="pix-string-input"
+                    />
+                    <button onclick="copyPixCode()">Copiar Código</button>
+                </div>
+
+                <div class="modal-actions">
+                    <button
+                        class="btn-modal-cancel"
+                        onclick="closePaymentModal()"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        class="btn-modal-confirm"
+                        onclick="confirmPaymentSimulation()"
+                    >
+                        Já paguei / Confirmar
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -37,108 +106,108 @@
         </div>
 
         <main class="document-workspace" id="document-workspace">
-            <div class="a4-sheet" id="cv-render-sheet">
-                <header class="cv-header-block">
-                    <h2 id="cv-nome"></h2>
-                    <p id="cv-cargo"></p>
-                </header>
+            <div class="a4-container-preview">
+                <div class="a4-sheet" id="cv-render-sheet">
+                    <div class="cv-columns-layout">
+                        <aside class="cv-left-col">
+                            <div
+                                class="cv-photo-container"
+                                id="preview-photo-bucket"
+                                style="display: none"
+                            >
+                                <img
+                                    src=""
+                                    id="preview-photo"
+                                    alt="Foto de perfil"
+                                />
+                            </div>
 
-                <div class="cv-columns-layout">
-                    <aside class="cv-left-col">
-                        <div
-                            class="cv-photo-area"
-                            id="preview-photo-bucket"
-                            style="display: none"
-                        >
-                            <img
-                                id="preview-photo"
-                                src=""
-                                alt="Foto de Perfil"
-                            />
-                        </div>
+                            <div class="cv-section-aside">
+                                <h4>Contato</h4>
+                                <ul
+                                    class="cv-contact-list"
+                                    id="cv-contato-lista"
+                                ></ul>
+                            </div>
 
-                        <div class="cv-section-aside">
-                            <h4>Contato</h4>
-                            <ul id="cv-contato-lista"></ul>
-                        </div>
+                            <div class="cv-section-aside">
+                                <h4>Competências</h4>
+                                <ul
+                                    class="cv-skills-list"
+                                    id="cv-competencias-lista"
+                                ></ul>
+                            </div>
 
-                        <div
-                            class="cv-section-aside"
-                            id="cv-competencias-box"
-                            style="display: none"
-                        >
-                            <h4>Competências</h4>
-                            <ul
-                                id="cv-competencias-lista"
-                                class="bullet-list"
-                            ></ul>
-                        </div>
+                            <div
+                                class="cv-section-aside"
+                                id="cv-idiomas-box"
+                                style="display: none"
+                            >
+                                <h4>Idiomas</h4>
+                                <p
+                                    id="cv-idiomas"
+                                    style="
+                                        white-space: pre-line;
+                                        font-size: 13px;
+                                        color: #444;
+                                    "
+                                ></p>
+                            </div>
+                        </aside>
 
-                        <div
-                            class="cv-section-aside"
-                            id="cv-idiomas-box"
-                            style="display: none"
-                        >
-                            <h4>Idiomas</h4>
-                            <p
-                                id="cv-idiomas"
-                                style="white-space: pre-line"
-                            ></p>
-                        </div>
-                    </aside>
+                        <section class="cv-right-main">
+                            <div class="cv-header-block">
+                                <h1 id="cv-nome">Nome</h1>
+                                <h2 id="cv-cargo">Cargo</h2>
+                            </div>
 
-                    <section class="cv-right-col">
-                        <div
-                            class="cv-section-main"
-                            id="cv-resumo-box"
-                            style="display: none"
-                        >
-                            <h3>Perfil Profissional</h3>
-                            <p id="cv-resumo" style="white-space: pre-line"></p>
-                        </div>
+                            <div class="cv-section-main" id="cv-resumo-box">
+                                <h3>Perfil Profissional</h3>
+                                <p
+                                    id="cv-resumo"
+                                    style="white-space: pre-line"
+                                ></p>
+                            </div>
 
-                        <div
-                            class="cv-section-main"
-                            id="cv-experiencias-box"
-                            style="display: none"
-                        >
-                            <h3>Experiência Profissional</h3>
-                            <div id="cv-experiencias-container"></div>
-                        </div>
+                            <div
+                                class="cv-section-main"
+                                id="cv-experiencias-box"
+                            >
+                                <h3>Experiência Profissional</h3>
+                                <div id="cv-experiencias-container"></div>
+                            </div>
 
-                        <div
-                            class="cv-section-main"
-                            id="cv-formacoes-box"
-                            style="display: none"
-                        >
-                            <h3>Formação Acadêmica</h3>
-                            <div id="cv-formacoes-container"></div>
-                        </div>
+                            <div
+                                class="cv-section-main"
+                                id="cv-formacoes-box"
+                                style="display: none"
+                            >
+                                <h3>Formação Acadêmica</h3>
+                                <div id="cv-formacoes-container"></div>
+                            </div>
 
-                        <div
-                            class="cv-section-main"
-                            id="cv-certificacoes-box"
-                            style="display: none"
-                        >
-                            <h3>Certificações</h3>
-                            <p
-                                id="cv-certificacoes"
-                                style="white-space: pre-line"
-                            ></p>
-                        </div>
+                            <div
+                                class="cv-section-main"
+                                id="cv-certificacoes-box"
+                                style="display: none"
+                            >
+                                <h3>Certificações</h3>
+                                <div id="cv-certificacoes-container"></div>
+                            </div>
 
-                        <div
-                            class="cv-section-main"
-                            id="cv-interesses-box"
-                            style="display: none"
-                        >
-                            <h3>Áreas de Interesse</h3>
-                            <p
-                                id="cv-interesses"
-                                style="white-space: pre-line"
-                            ></p>
-                        </div>
-                    </section>
+                            <div
+                                class="cv-section-main"
+                                id="cv-interesses-box"
+                                style="display: none"
+                            >
+                                <h3>Áreas de Interesse</h3>
+                                <p
+                                    id="cv-interesses"
+                                    style="white-space: pre-line"
+                                ></p>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </main>
